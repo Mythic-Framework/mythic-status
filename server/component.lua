@@ -13,6 +13,7 @@ function RetrieveComponents()
 	Inventory = exports["mythic-base"]:FetchComponent("Inventory")
 	Wallet = exports["mythic-base"]:FetchComponent("Wallet")
 	Execute = exports["mythic-base"]:FetchComponent("Execute")
+	Version = exports["mythic-base"]:FetchComponent("Version")
 	RegisterChatCommands()
 	registerUsables()
 end
@@ -27,12 +28,14 @@ AddEventHandler("Core:Shared:Ready", function()
 		"Inventory",
 		"Wallet",
 		"Execute",
+		"Version",
 	}, function(error)
 		if #error > 0 then
 			return
 		end -- Do something to handle if not all dependencies loaded
 		RetrieveComponents()
 		RegisterCallbacks()
+		Version:Check('Mythic-Framework/Mythic-VersionCheckers', GetCurrentResourceName())
 	end)
 end)
 
